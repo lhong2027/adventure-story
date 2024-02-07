@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Adventure Story</title>
+</head>
+
+<style>
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+@font-face {
+    font-family: 'arcade';
+    src: url(arcade/ARCADE.TTF);
+}  
+ 
+@font-face {
+    font-family: 'pixelify-sans';
+    src: url(Pixelify_Sans/PixelifySans-VariableFont_wght.ttf)
+}
+
+
+
+.container { text-align: center; height: 100vh; position: relative; overflow: hidden;}
+
+
+body {
+    background-color:rgb(20, 18, 24); 
+}
+
+.background {position: fixed;top: 0;left: 0;width: 100vw;height: 100vh;z-index: -1;}
+
+h1 {
+    font-size: 620%; 
+    font-family: 'arcade'; 
+    color: rgb(255, 145, 28); 
+    font-weight: 100; 
+    margin-top: 7%; 
+    animation-timing-function: linear; 
+    animation-duration: 1s; 
+    animation-iteration-count: infinite; 
+    animation-direction: alternate;
+    animation-name: float;
+}
+
+@keyframes float {
+
+    0%{ transform: translate( 0px, -5px);}
+
+    25% {transform: translate( 0px, -15px);}
+
+    50% {transform: translate( 0px, -25px);}
+
+    75% {transform: translate( 0px, -35px);}
+
+    100% {transform: translate( 0px, -45px);}
+}
+
+h2 {
+    font-family: 'arcade'; font-size: 230%; color:rgb(255, 145, 28); margin-top: 1%;
+}
+
+.position{
+    display: flex; justify-content: center; align-items: center;
+}
+
+.button1 {
+			border: 3px solid black;
+			padding: 25px 20px 20px 20px;
+			font-size: 22px;
+			background-color: rgb(255, 255, 255);
+			box-shadow: 2px 2px 0 black;
+			cursor: pointer;
+			margin: 10px 0px;
+			font-family: 'arcade';
+            font-weight: 700;
+          
+		}
+
+        .button1:hover {
+			box-shadow: 4px 4px 0 black;
+			transform: translate(-2px, -2px);
+		}
+		.button1:active {
+			box-shadow: 0px 0px 0 black;
+			transform: translate(2px, 2px);
+		}
+
+.button2 {
+			border: 3px solid black;
+			padding: 20px 20px;
+			font-size: 22px;
+			background-color: rgb(179, 251, 255);
+			box-shadow: 2px 2px 0 black;
+			cursor: pointer;
+			margin: 20px 20px;
+			font-family: 'arcade';
+            font-weight: 700;
+           
+		}
+
+        .button2:hover {
+			box-shadow: 4px 4px 0 black;
+			transform: translate(-2px, -2px);
+		}
+		.button2:active {
+			box-shadow: 0px 0px 0 black;
+			transform: translate(2px, 2px);
+		}
+
+a {
+    color: rgb(225, 255, 0);  
+    position:absolute;
+    bottom:0; 
+    right:0;
+    font-size: 20px;
+    font-family: 'arcade';
+    margin-right: 15px;
+    margin-bottom: 20px;
+}
+
+
+#output { 
+    color:rgb(255, 145, 28); 
+    font-size: 400%; 
+    margin-top: 2%; 
+    margin-bottom: 2%;  
+    font-family: 'pixelify-sans'; 
+}
+#output img {
+    width: 265px;
+    height: 265px;
+    object-fit: contain;
+}
+
+.mushroom{
+    position: absolute; top: 63%; left: 9.5%; width: 80px; height: 90px; 
+}
+    .mushroom:hover{
+        transform: translate(0,-100px);
+        transition-duration: 1s;
+    }
+
+
+.monster {
+    position: absolute; top: 58%; left: 66%; width: 6%; height: 12%; 
+}
+    .monster:hover {
+        animation-name: shake;
+        animation-iteration-count: infinite;
+        animation-duration: .01s;
+        animation-timing-function: linear;
+        animation-direction: alternate;
+    }
+        @keyframes shake {
+            0%{ transform: translate( 0px, 0px);}
+            100% {transform: translate( 20px, 0px);}
+
+        }
+
+.cloud {position: absolute; top: 55%; left: 79%; width: 9%; height: 8%; }
+
+.worm {
+    position: absolute; top: 59%; left: 81.5%; width: 4%; height: 7%; 
+}
+    .worm:hover {
+        animation-name: descend;
+        animation-iteration-count: 1;
+        animation-duration: 1s;
+        animation-timing-function: linear;
+        animation-direction: normal;
+    }
+        @keyframes descend {
+            0%{ transform: translate( 0px, 0px);}
+            25% {transform: translate( 0px, 60px);}
+            50% {transform: translate( 0px, 120px);}
+            100% {transform: translate( 0px, 120px);}
+
+        }
+
+    .sword {
+        position: absolute; top: 68%; left: 15%; width: 5%; height: 8%; 
+    }
+        .sword:hover {
+        animation-name: swing;
+        animation-iteration-count: 1;
+        animation-duration: 1s;
+        animation-timing-function: cubic-bezier(0.83, 0, 0.17, 1);
+        animation-direction: normal;
+    }
+         @keyframes swing {
+            0%{ transform: translate( 0px, 0px);}
+            25% {transform: translate( 20px, 0px);}
+            50% {transform: rotate(90deg);}
+            100% {transform: translate( 0px, 0px);} 
+        }
+
+    .bird {
+        position: absolute; top: 41%; left: 22%; width: 5%; height: 8%; 
+    }
+
+    .potion {
+        position: absolute; top: 71%; left: 76%; width: 7%; height: 10%; 
+        animation-name: bounce;
+        animation-timing-function: linear;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        transition: 1s;
+    }
+        @keyframes bounce {
+            0%{ transform: translate( 0px, 0px);}
+            100% {transform: translate( 0px, 30px);}
+        }
+
+        .character-name {
+            font-size: 30px;
+            color:rgb(255, 111, 0);
+            background-color: antiquewhite;
+            width: 300px;
+            margin-left: 42%;
+
+           
+           
+        }
+
+
+
+</style>
+
+
+<body>
+
+
+<div class="container">
+
+    <h1 id="heading" onmouseenter="playAudio('assets/Star_Theme.mp3'); changeColor()" onmouseleave="stopChangeColor(); stopAudio();">Who Are You in an <br> Adventure Story?</h1>
+
+	<h2>You are a ... </h2>
+    
+    <p id="output">?</p>
+    <button onclick="runLoop(); playAudioClick('assets/Cute-Bell-SoundEffect.mp3')" class="button1">Press To Generate</button>
+
+    <img src="assets/background.png" class="background">
+
+    <a href="https://docs.google.com/document/d/1oksL7wGCFVj4mdTshHUzBG1efRDVTPBhWrPt4a_btQI/edit?usp=sharing">Credits</a>
+
+<div style="width: 5vw; height: 5vh; position:absolute; top:0; left:0; font-family: 'arcade';">
+   <button onclick="playAudioBGM('assets/Itty_Bitty.mp3');" class="button2">♫</button>
+</div> 
+
+</div>
+
+<img src="assets/mushroom-pixel-icon-free-vector.png" class="mushroom" onmouseenter="playAudioJump('assets/Mario-Jump-SoundEffect.mp3')">
+
+<img src="assets/monstercreature.png" class="monster" onmouseenter="playAudioShriek('assets/Kirby-Inhale-Sound.mp3')" onmouseleave="stopAudio5()">
+
+<img src="assets/worm.png" class="worm" onmouseenter="playAudioDown('assets/Mario-Pipe Warping-SoundEffect.mp3')" onmouseleave="stopAudio6()">
+
+<img src="assets/pixel-cloud.png" class="cloud">
+
+<img src="assets/sword.png" class="sword" onmouseenter="playAudioSwing('assets/sword_sound_effect.mp3')">
+
+<img src="assets/output-onlinegiftools.gif" class="bird">
+
+<img src="assets/giphy.gif" class="potion">
+
+
+
+	
+	<script>
+
+    //Generator
+		var options = [
+            "assets/madscientist.png", 
+            "assets/travler.png",
+            "assets/dancer.png",
+            "assets/ghost.png",
+            "assets/tourist.png",
+            "assets/rockstar.png",
+            "assets/princess.png",
+            "assets/zombie.png",
+            "assets/clown.png",
+            "assets/skeleton.png",
+         ]
+         var optionsText = [
+            "madscientist", 
+            "travler",
+            "dancer",
+            "ghost",
+            "tourist",
+            "rockstar",
+            "princess",
+            "zombie",
+            "clown",
+            "skeleton",
+         ]
+		
+		function runLoop() {
+			var output = document.querySelector("#output");
+
+			
+			var currentLoop = 0;
+			var maxLoops = Math.round(Math.random()*10 + 5);
+
+			
+			var myLoop = setInterval(function () {
+				
+				var randomIndex = Math.floor(Math.random()*options.length);
+				output.innerHTML = `<img src="${options[randomIndex]}"><p class="character-name">${optionsText[randomIndex]}</p>`;
+
+				
+				currentLoop = currentLoop + 1;
+				if (currentLoop >= maxLoops) {
+					clearInterval(myLoop);}}, 100)
+		}
+
+       
+    //Header color changer
+
+        var myLoop;
+        function changeColor() {
+            var heading = document.querySelector("#heading")
+            myLoop = setInterval(function() {
+                
+                var red = Math.floor(Math.random()*255);
+                var green = Math.floor(Math.random()*255);
+                var blue = Math.floor(Math.random()*255);
+
+                heading.style.color = `rgb(${red}, ${green}, ${blue})`;
+            },50)
+        }
+        function stopChangeColor() {
+            clearInterval(myLoop);
+        }
+
+
+        //Star Theme
+        var audio1;
+        function playAudio(fileName) {
+			audio1 = new Audio(fileName);
+			audio1.play();
+		}
+        function stopAudio() {
+            audio1.pause();
+        }
+
+         //BGM
+         var audio2;
+         var playing = false;
+         function playAudioBGM(fileName) {
+            if (playing == false) {
+                audio2 = new Audio(fileName);
+                audio2.play();
+                playing = true;
+            } else {
+                audio2.pause();
+                playing = false;
+            }
+		}
+
+        //Mario Jump 
+        var audio3;
+        function playAudioJump(fileName) {
+			audio3 = new Audio(fileName);
+			audio3.play();}
+
+        //Click Button Sound
+        var audio4;
+        function playAudioClick(fileName) {
+			audio4 = new Audio(fileName);
+			audio4.play();}
+
+        //MonsterShriek
+        var audio5;
+        function playAudioShriek(fileName) {
+			audio5 = new Audio(fileName);
+			audio5.play();}
+
+        function stopAudio5() {
+            audio5.pause();}
+
+        //Worm
+        var audio6;
+        function playAudioDown(fileName) {
+			audio6 = new Audio(fileName);
+			audio6.play();}
+
+        function stopAudio6() {
+            audio6.pause();}
+
+        //sword
+        var audio7;
+        function playAudioSwing(fileName) {
+			audio7 = new Audio(fileName);
+			audio7.play();}
+
+
+
+	</script>
+</body>
+</html>
